@@ -26,13 +26,13 @@ class Home:
         self.frame.place(relx=0.5, rely=0.5, anchor="center")
 
         #Buttons
-        self.Admin_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"),text="Admin", command=self.Admin)
+        self.Admin_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 20, "bold"),text="Admin", command=self.Admin)
         self.Admin_btn.grid(row=0,column=0, padx=20)
 
-        self.Faculty_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", text="Faculty",font=("Comic sans", 12, "bold"), command=self.Faculty)
+        self.Faculty_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", text="Faculty",font=("Comic sans", 20, "bold"), command=self.Faculty)
         self.Faculty_btn.grid(row=0, column=1,padx=20)
 
-        self.Student_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", text="Student", font=("Comic sans", 12, "bold"),command=self.Student)
+        self.Student_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", text="Student", font=("Comic sans", 20, "bold"),command=self.Student)
         self.Student_btn.grid(row=0,column=2, padx=20)
 
     def Admin(self):
@@ -57,24 +57,24 @@ class Attendance:
             self.frame = tk.Frame(self.root)
             self.frame.place(relx=0.5, rely=0.5, anchor='center')
 
-            self.C_id_label = Label(self.frame, text='Select Course Id : ')
+            self.C_id_label = Label(self.frame, text='Select Course Id : ', font=('bold', 12))
             self.C_id_label.grid(row=0, column=0)
-            self.USN_label = Label(self.frame, text='Select Valid USN :')
+            self.USN_label = Label(self.frame, text='Select Valid USN :', font=('bold', 12))
             self.USN_label.grid(row=1, column=0)
-            self.F_id_label = Label(self.frame, text='Select Valid Faculty Id :')
+            self.F_id_label = Label(self.frame, text='Select Valid Faculty Id :', font=('bold', 12))
             self.F_id_label.grid(row=2, column=0)
-            self.At_id_label = Label(self.frame, text='Enter Attendance Id : ')
-            self.At_id_label.grid(row=3, column=0)
-            self.At_pct_label = Label(self.frame, text='Enter Attendance Percentage: ')
-            self.At_pct_label.grid(row=4, column=0)
+            self.At_id_label = Label(self.frame, text='Enter Attendance Id : ', font=('bold', 12))
+            self.At_id_label.grid(row=3, column=0, pady=7)
+            self.At_pct_label = Label(self.frame, text='Enter Attendance Percentage: ', font=('bold', 12))
+            self.At_pct_label.grid(row=4, column=0, pady=7)
 
             self.At_id = Entry(self.frame, width=30)
-            self.At_id.grid(row=3, column=1, padx=10)
+            self.At_id.grid(row=3, column=1, padx=10, pady=7)
             self.At_pct = Entry(self.frame, width=30)
-            self.At_pct.grid(row=4, column=1, padx=10)
+            self.At_pct.grid(row=4, column=1, padx=10, pady=7)
 
-            self.create_btn = Button(self.frame, text='Submit Attendance', bg='cyan', command=self.create)
-            self.create_btn.grid(row=5, column=1, padx=10, pady=10)
+            self.create_btn = Button(self.frame, text='Submit Attendance',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.create)
+            self.create_btn.grid(row=5, column=1, pady=7, padx=7)
 
             # drop down for usn
             mydb = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
@@ -88,7 +88,7 @@ class Attendance:
             self.clicked1 = StringVar(self.frame)
             # self.clicked.set(self.options[0])  # default option
             self.drop = OptionMenu(self.frame, self.clicked1, *self.options1)
-            self.drop.grid(row=0, column=1)
+            self.drop.grid(row=0, column=1, pady=7)
 
             # drop down for usn
             mydb = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
@@ -102,7 +102,7 @@ class Attendance:
             self.clicked2 = StringVar(self.frame)
             # self.clicked.set(self.options[0])  # default option
             self.drop = OptionMenu(self.frame, self.clicked2, *self.options2)
-            self.drop.grid(row=1, column=1)
+            self.drop.grid(row=1, column=1, pady=7)
 
             # drop down for Fac_id
             mydb = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
@@ -116,11 +116,11 @@ class Attendance:
             # self.clicked.set(self.options[0])  # default option
 
             self.drop = OptionMenu(self.frame, self.clicked3, *self.options)
-            self.drop.grid(row=2, column=1, columnspan=2)
+            self.drop.grid(row=2, column=1, pady=7)
 
             # go back
-            self.cancel_btn = tk.Button(self.frame, text='go back', command=self.back)
-            self.cancel_btn.grid(row=6, column=2, columnspan=1)
+            self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.back)
+            self.cancel_btn.grid(row=6, column=1, pady=7, padx=7)
 
         def back(self):
             self.frame.destroy()
@@ -158,7 +158,7 @@ class ViewAtt:
         self.frame.place(relx=0.5, rely=0.5, anchor="center")
         self.frame.config(background='white')
 
-        self.USN_label = Label(self.frame, text='Select Valid USN :')
+        self.USN_label = Label(self.frame, text='Select Valid USN :', font=('bold', 12))
         self.USN_label.grid(row=0, column=0)
 
         # drop down for usn
@@ -174,8 +174,13 @@ class ViewAtt:
         self.drop = OptionMenu(self.frame, self.clicked1, *self.options1)
         self.drop.grid(row=0, column=1)
 
+        self.style = ttk.Style()
+        self.style.configure("Treeview", background="silver", foreground="black", fieldbackground="silver")
+        self.style.map("Treeview", background=[('selected', "#00ff00")])
+
         self.cols = ('Course_id', 'USN', 'Faculty_id', 'Attendance_id', 'Attendance_Percent')
         self.listBox = ttk.Treeview(self.frame, columns=self.cols, show='headings')
+
 
         for col in self.cols:
             self.listBox.heading(col, text=col)
@@ -187,10 +192,10 @@ class ViewAtt:
             self.listBox.column("#4", anchor=CENTER, width=100)
             self.listBox.column("#5", anchor=CENTER, width=100)
 
-        self.create_btn = Button(self.frame, text='Check Attendance', bg='cyan', command=self.create)
+        self.create_btn = Button(self.frame, text='Check Attendance',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.create)
         self.create_btn.grid(row=1, column=1, padx=10, pady=10)
 
-        self.cancel_btn = tk.Button(self.frame, text='go back', command=self.back)
+        self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.back)
         self.cancel_btn.grid(row=2, column=1, columnspan=1)
 
     def back(self):
@@ -234,24 +239,24 @@ class login:
         # Labels
         self.username_label = tk.Label(self.frame, text="Username:", font=('Helvetica', 15), bg='white')
         self.username_label.grid(row=4, column=9, pady= 10)
-        self.username = tk.Entry(self.frame,bg='white')
+        self.username = tk.Entry(self.frame,bg='white', width=30)
         self.username.grid(row=4, column=10, pady= 10)
 
         self.password_label = tk.Label(self.frame, text="Password:", font=('Helvetica', 15), bg='white')
         self.password_label.grid(row=8, column=9, pady= 10)
-        self.password = tk.Entry(self.frame, bg='white')
+        self.password = tk.Entry(self.frame, bg='white', width=30)
         self.password.grid(row=8, column=10, pady=10)
         self.password.config(show="*")
 
         # Login button
-        self.login_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), text="Login", command=self.Login)
+        self.login_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), text="Login", command=self.Login)
         self.login_btn.grid(row=10, column=10, pady= 10)
 
         # cancel button
         # self.cancel_btn = tk.Button(self.frame, text='Cancel', command=self.cancel)
         # self.cancel_btn.grid(row=4, columnspan=2)
 
-        self.back_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), text='Go Back', command=self.back)
+        self.back_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), text='Go Back', command=self.back)
         self.back_btn.grid(row=15, column=10, pady=10)
 
     def back(self):
@@ -289,19 +294,19 @@ class Records:
         self.frame.place(relx=0.5, rely=0.5, anchor="center")
 
         # create btns
-        self.Student_btn = Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), text='Insert Student Profile', command=self.Student)
+        self.Student_btn = Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), text='Insert Student Profile', command=self.Student)
         self.Student_btn.grid(row=1, column=1,pady=10)
 
-        self.Faculty_btn = Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), text='Insert Faculty Profile', command=self.Faculty)
+        self.Faculty_btn = Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), text='Insert Faculty Profile', command=self.Faculty)
         self.Faculty_btn.grid(row=2, column=1,pady=10 )
 
-        self.AddBranch_btn = Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), text='Add Branch', command=self.Branch)
+        self.AddBranch_btn = Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), text='Add Branch', command=self.Branch)
         self.AddBranch_btn.grid(row=3, column=1, pady=10)
 
-        self.AddCourse_btn = Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), text='Add Course', command=self.Course)
+        self.AddCourse_btn = Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), text='Add Course', command=self.Course)
         self.AddCourse_btn.grid(row=4, column=1,pady=10 )
 
-        self.back_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), text='Go Back', command=self.back)
+        self.back_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), text='Go Back', command=self.back)
         self.back_btn.grid(row=5,column=1,pady=10 )
 
     def back(self):
@@ -336,15 +341,15 @@ class StuRec:
         self.frame.place(relx=0.5, rely=0.5, anchor="center")
 
         # Create Text Box Labels
-        self.USN_label = Label(self.frame, text='Enter USN', font=('bold', 11))
+        self.USN_label = Label(self.frame, text='Enter USN', font=('bold', 12))
         self.USN_label.grid(row=0, column=0)
-        self.S_Name_label = Label(self.frame, text='Enter Name', font=('bold', 11))
+        self.S_Name_label = Label(self.frame, text='Enter Name', font=('bold', 12))
         self.S_Name_label.grid(row=1, column=0)
-        self.S_Phone_label = Label(self.frame, text='Enter Phone Number', font=('bold', 11))
+        self.S_Phone_label = Label(self.frame, text='Enter Phone Number', font=('bold', 12))
         self.S_Phone_label.grid(row=2, column=0)
-        self.S_Email_label = Label(self.frame, text='Enter mail', font=('bold', 11))
+        self.S_Email_label = Label(self.frame, text='Enter mail', font=('bold', 12))
         self.S_Email_label.grid(row=3, column=0)
-        self.S_Address_label = Label(self.frame, text='Enter Address', font=('bold', 11))
+        self.S_Address_label = Label(self.frame, text='Enter Address', font=('bold', 12))
         self.S_Address_label.grid(row=4, column=0)
 
         # Create Text boxes
@@ -361,19 +366,19 @@ class StuRec:
 
 
         # Submit button
-        self.submit_btn = Button(self.frame, text='Submit your Profile',width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), command=self.submit)
+        self.submit_btn = Button(self.frame, text='Submit your Profile',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.submit)
         self.submit_btn.grid(row=6, column=0, padx=10, pady=10)
 
         # Query Button
-        self.query_btn = Button(self.frame, text='Show Profile', width="20", height="2", bg="light blue",font=("Comic sans", 12, "bold"), command=self.GetProfile)
+        self.query_btn = Button(self.frame, text='Show Profile', width="20", height="2", bg="light blue",font=("Comic sans", 13, "bold"), command=self.GetProfile)
         self.query_btn.grid(row=6, column=1, padx=10, pady=10)
 
         # Delete button
-        self.delete_btn = Button(self.frame, text='Delete Profile',width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), command=self.DelProfile)
+        self.delete_btn = Button(self.frame, text='Delete Profile',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.DelProfile)
         self.delete_btn.grid(row=6, column=2, padx=10, pady=10)
 
         # go back
-        self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), command=self.back)
+        self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.back)
         self.cancel_btn.grid(row=9, column=2,padx=10, pady=20)
 
     def back(self):
@@ -452,7 +457,7 @@ class StuRec:
 
         # list box
         self.list_box = Listbox(self.frame)
-        self.list_box.grid(row=5,column=1)
+        self.list_box.grid(row=0,column=2)
 
         conn = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
         c = conn.cursor()
@@ -513,15 +518,15 @@ class FacultyRec:
         self.frame.place(relx=0.5, rely=0.5, anchor="center")
 
         # Create Text Box Labels
-        self.F_id_label = Label(self.frame, text='Enter Faculty Id', font=('bold', 11))
+        self.F_id_label = Label(self.frame, text='Enter Faculty Id', font=('bold', 12))
         self.F_id_label.grid(row=0, column=0)
-        self.F_Name_label = Label(self.frame, text='Enter Faculty Name', font=('bold', 11))
+        self.F_Name_label = Label(self.frame, text='Enter Faculty Name', font=('bold', 12))
         self.F_Name_label.grid(row=2, column=0)
-        self.F_Phone_label = Label(self.frame, text='Enter Phone Number', font=('bold', 11))
+        self.F_Phone_label = Label(self.frame, text='Enter Phone Number', font=('bold', 12))
         self.F_Phone_label.grid(row=4, column=0)
-        self.F_Email_label = Label(self.frame, text='Enter mail', font=('bold', 11))
+        self.F_Email_label = Label(self.frame, text='Enter mail', font=('bold', 12))
         self.F_Email_label.grid(row=6, column=0)
-        self.F_Address_label = Label(self.frame, text='Enter Address', font=('bold', 11))
+        self.F_Address_label = Label(self.frame, text='Enter Address', font=('bold', 12))
         self.F_Address_label.grid(row=8, column=0)
 
         # Create Text boxes
@@ -537,19 +542,19 @@ class FacultyRec:
         self.F_Address.grid(row=8, column=1, pady=10)
 
         # Submit button
-        self.submit_btn = Button(self.frame, text='Submit your Profile',width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), command=self.submit)
+        self.submit_btn = Button(self.frame, text='Submit your Profile',width="20",height="2",bg="light blue", font=("Comic sans", 15, "bold"), command=self.submit)
         self.submit_btn.grid(row=12, column=0,padx=10, pady=10)
 
         # Query Button
-        self.query_btn = Button(self.frame, text='Show Profile', width="20", height="2", bg="light blue",font=("Comic sans", 12, "bold"), command=self.GetProfile)
+        self.query_btn = Button(self.frame, text='Show Profile', width="20", height="2", bg="light blue",font=("Comic sans", 15, "bold"), command=self.GetProfile)
         self.query_btn.grid(row=12, column=1, padx=10, pady=10)
 
         # Delete button
-        self.delete_btn = Button(self.frame, text='Delete Profile',width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), command=self.DelProfile)
+        self.delete_btn = Button(self.frame, text='Delete Profile',width="20",height="2",bg="light blue", font=("Comic sans", 15, "bold"), command=self.DelProfile)
         self.delete_btn.grid(row=12, column=2,padx=10, pady=10)
 
         # go back
-        self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), command=self.back)
+        self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 15, "bold"), command=self.back)
         self.cancel_btn.grid(row=16, column=2,padx=10, pady=20)
 
     def back(self):
@@ -683,15 +688,15 @@ class AddBranch:
         #self.frame.config(background='grey')
 
         # creating Text Labels
-        self.Branch_Name_label = Label(self.frame, text='Select Branch Name', font=('bold', 11))
+        self.Branch_Name_label = Label(self.frame, text='Select Branch Name', font=('bold', 12))
         self.Branch_Name_label.grid(row=1, column=0)
-        self.USN_label = Label(self.frame, text='Select Valid USN:', font=('bold', 11))
+        self.USN_label = Label(self.frame, text='Select Valid USN:', font=('bold', 12))
         self.USN_label.grid(row=2, column=0)
-        self.F_id_label = Label(self.frame, text='Select Valid Faculty Id:', font=('bold', 11))
+        self.F_id_label = Label(self.frame, text='Select Valid Faculty Id:', font=('bold', 12))
         self.F_id_label.grid(row=3, column=0)
 
         # creating a Create button
-        self.create_btn = Button(self.frame, text='Register',width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"),command=self.create)
+        self.create_btn = Button(self.frame, text='Register',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"),command=self.create)
         self.create_btn.grid(row=4, column=1, padx=10, pady=10)
 
         #dropdown for Branch Name
@@ -732,7 +737,7 @@ class AddBranch:
         self.drop.grid(row=3, column=1, pady=10)
 
         # go back
-        self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), command=self.back)
+        self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.back)
         self.cancel_btn.grid(row=5, column=1)
 
     def back(self):
@@ -776,13 +781,13 @@ class AddCourse:
         self.frame.place(relx=0.5, rely=0.5, anchor="center")
         #self.frame.config(background='white')
 
-        self.C_id_label = Label(self.frame, text='Enter Course Id : ', font=('bold', 11))
+        self.C_id_label = Label(self.frame, text='Enter Course Id : ', font=('bold', 12))
         self.C_id_label.grid(row=0, column=0)
-        self.C_Name_label = Label(self.frame, text='Enter Course Name :', font=('bold', 11))
+        self.C_Name_label = Label(self.frame, text='Enter Course Name :', font=('bold', 12))
         self.C_Name_label.grid(row=1, column=0)
-        self.USN_label = Label(self.frame, text='Enter Valid USN :', font=('bold', 11))
+        self.USN_label = Label(self.frame, text='Enter Valid USN :', font=('bold', 12))
         self.USN_label.grid(row=2, column=0)
-        self.F_id_label = Label(self.frame, text='Enter Valid Faculty Id :', font=('bold', 11))
+        self.F_id_label = Label(self.frame, text='Enter Valid Faculty Id :', font=('bold', 12))
         self.F_id_label.grid(row=3, column=0)
 
         self.C_id = Entry(self.frame, width=30)
@@ -790,7 +795,7 @@ class AddCourse:
         self.C_Name = Entry(self.frame, width=30)
         self.C_Name.grid(row=1, column=1,pady=10)
 
-        self.create_btn = Button(self.frame, text='Register',width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), command=self.create)
+        self.create_btn = Button(self.frame, text='Register',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.create)
         self.create_btn.grid(row=4, column=1, padx=10, pady=10)
 
 
@@ -821,8 +826,8 @@ class AddCourse:
         self.drop.grid(row=3, column=1,pady=10)
 
         # go back
-        self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 12, "bold"), command=self.back)
-        self.cancel_btn.grid(row=5, column=1, padx=10, pady=10)
+        self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.back)
+        self.cancel_btn.grid(row=5, column=1, padx=10, pady=(10,10))
 
     def back(self):
         self.frame.destroy()
@@ -857,5 +862,3 @@ class AddCourse:
 root = tk.Tk()
 run = Home(root)
 root.mainloop()
-
-#hshshshshshshshshshhutup
