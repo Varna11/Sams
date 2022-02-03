@@ -443,10 +443,6 @@ class StuRec:
                                     font=("Comic sans", 12, "bold"), command=self.back)
         self.cancel_btn.grid(row=9, column=2, padx=10, pady=20)
 
-        # go back
-        self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.back)
-        self.cancel_btn.grid(row=9, column=2,padx=10, pady=20)
-
 
     def back(self):
         self.frame.destroy()
