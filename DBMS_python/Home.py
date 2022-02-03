@@ -443,20 +443,6 @@ class StuRec:
                                     font=("Comic sans", 12, "bold"), command=self.back)
         self.cancel_btn.grid(row=9, column=2, padx=10, pady=20)
 
-        self.submit_btn = Button(self.frame, text='Submit your Profile',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.submit)
-        self.submit_btn.grid(row=6, column=0, padx=10, pady=10)
-
-        # Delete button
-        self.delete_btn = Button(self.frame, text='Delete Profile', width="20", height="2", bg="light blue",
-                                 font=("Comic sans", 13, "bold"), command=self.DelProfile)
-        self.delete_btn.grid(row=6, column=1, padx=10, pady=10)
-
-        # Query Button
-        self.query_btn = Button(self.frame, text='Show Profile', width="20", height="2", bg="light blue",font=("Comic sans", 13, "bold"), command=self.GetProfile)
-        self.query_btn.grid(row=6, column=2, padx=10, pady=10)
-
-
-
         # go back
         self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.back)
         self.cancel_btn.grid(row=9, column=2,padx=10, pady=20)
