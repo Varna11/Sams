@@ -360,7 +360,7 @@ class StuRec:
         self.S_Name_label.grid(row=1, column=0)
         self.S_Phone_label = Label(self.frame, text='Enter Phone Number', font=('bold', 12))
         self.S_Phone_label.grid(row=2, column=0)
-        self.S_Email_label = Label(self.frame, text='Enter mail', font=('bold', 12))
+        self.S_Email_label = Label(self.frame, text='Enter Mail', font=('bold', 12))
         self.S_Email_label.grid(row=3, column=0)
         self.S_Address_label = Label(self.frame, text='Enter Address', font=('bold', 12))
         self.S_Address_label.grid(row=4, column=0)
@@ -396,6 +396,7 @@ class StuRec:
         self.cancel_btn = tk.Button(self.frame, text='Go Back', width="20", height="2", bg="light blue",
                                     font=("Comic sans", 12, "bold"), command=self.back)
         self.cancel_btn.grid(row=9, column=2, padx=10, pady=20)
+
 
     def back(self):
         self.frame.destroy()
