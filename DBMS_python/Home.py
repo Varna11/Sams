@@ -1,31 +1,22 @@
-import sys
-import textwrap
 import mysql.connector as ms
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox, ttk
-from PIL import ImageTk, Image
 
 
 class Home:
     def __init__(self, root):
         self.root = root
-        # self.photo2 = PhotoImage(file='login.png')
-        # self.photo = tk.Label(self.root, image=self.photo2, bg='white')
-        # self.photo.grid(row=0, column=0)
-        self.root.attributes('-fullscreen',True)
-
+        self.root.attributes('-fullscreen', True)
         self.root.title('Home')
-        self.lbltitle = Label(self.root, text="STUDENT ATTENDANCE MANAGEMENT SYSTEM", font=("Roboto", 30, "bold"),
-                              fg="dark blue", bg="light blue", relief=RAISED, bd=10)
-        self.lbltitle.place(x=0, y=1, relwidth=1)
-
-        # self.root.iconbitmap('C:\\Program Files\\JetBrains\\PyCharm Community Edition 2021.3.2\\Admin.ico')
+        self.lbl_title = Label(self.root, text="STUDENT ATTENDANCE MANAGEMENT SYSTEM", font=("Roboto", 30, "bold"),
+                               fg="dark blue", bg="light blue", relief=RAISED, bd=10)
+        self.lbl_title.place(x=0, y=1, relwidth=1)
         self.root.geometry('700x600')
         self.root.config(bg="#1572A1")
+
         self.frame = tk.Frame(self.root, bg="#1572A1")
         self.frame.place(relx=0.5, rely=0.5, anchor="center")
-
 
         # Buttons
         self.Admin_btn = tk.Button(self.frame, width="20", height="2", bg="light blue", font=("Comic sans", 12, "bold"),
@@ -40,16 +31,18 @@ class Home:
                                      font=("Comic sans", 12, "bold"), command=self.Student)
         self.Student_btn.grid(row=0, column=2, padx=20)
 
-        #Buttons
-        self.Admin_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 20, "bold"),text="Admin", command=self.Admin)
-        self.Admin_btn.grid(row=0,column=0, padx=20)
+        # Buttons
+        self.Admin_btn = tk.Button(self.frame, width="20", height="2", bg="light blue", font=("Comic sans", 20, "bold"),
+                                   text="Admin", command=self.Admin)
+        self.Admin_btn.grid(row=0, column=0, padx=20)
 
-        self.Faculty_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", text="Faculty",font=("Comic sans", 20, "bold"), command=self.Faculty)
-        self.Faculty_btn.grid(row=0, column=1,padx=20)
+        self.Faculty_btn = tk.Button(self.frame, width="20", height="2", bg="light blue", text="Faculty",
+                                     font=("Comic sans", 20, "bold"), command=self.Faculty)
+        self.Faculty_btn.grid(row=0, column=1, padx=20)
 
-        self.Student_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", text="Student", font=("Comic sans", 20, "bold"),command=self.Student)
-        self.Student_btn.grid(row=0,column=2, padx=20)
-
+        self.Student_btn = tk.Button(self.frame, width="20", height="2", bg="light blue", text="Student",
+                                     font=("Comic sans", 20, "bold"), command=self.Student)
+        self.Student_btn.grid(row=0, column=2, padx=20)
 
     def Admin(self):
         self.frame.destroy()
@@ -74,27 +67,28 @@ class Attendance:
         self.frame = tk.Frame(self.root)
         self.frame.place(relx=0.5, rely=0.5, anchor='center')
 
-        self.C_id_label = Label(self.frame, text='Select Course Id : ')
+        self.C_id_label = Label(self.frame, text='Select Course Id : ', font=('Helvetica', 10))
         self.C_id_label.grid(row=0, column=0)
-        self.USN_label = Label(self.frame, text='Select Valid USN :')
+        self.USN_label = Label(self.frame, text='Select Valid USN :', font=('Helvetica', 10))
         self.USN_label.grid(row=1, column=0)
-        self.F_id_label = Label(self.frame, text='Select Valid Faculty Id :')
+        self.F_id_label = Label(self.frame, text='Select Valid Faculty Id :', font=('Helvetica', 10))
         self.F_id_label.grid(row=2, column=0)
-        self.At_id_label = Label(self.frame, text='Enter Attendance Id : ')
+        self.At_id_label = Label(self.frame, text='Enter Attendance Id : ', font=('Helvetica', 10))
         self.At_id_label.grid(row=3, column=0)
-        self.At_pct_label = Label(self.frame, text='Enter Attendance Percentage: ')
+        self.At_pct_label = Label(self.frame, text='Enter Attendance Percentage: ', font=('Helvetica', 10))
         self.At_pct_label.grid(row=4, column=0)
 
         self.At_id = Entry(self.frame, width=30)
-        self.At_id.grid(row=3, column=1, padx=10)
+        self.At_id.grid(row=3, column=1, padx=10, pady=10)
         self.At_pct = Entry(self.frame, width=30)
         self.At_pct.grid(row=4, column=1, padx=10)
 
-        self.create_btn = Button(self.frame, text='Submit Attendance', bg='cyan', command=self.create)
+        self.create_btn = Button(self.frame, text='Submit Attendance', width="20", height="2", bg="light blue",
+                                 font=("Comic sans", 13, "bold"), command=self.create)
         self.create_btn.grid(row=5, column=1, padx=10, pady=10)
 
-        # drop down for usn
-        mydb = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+        # drop down for course
+        mydb = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
         c = mydb.cursor()
         sql = "Select C_id from Course"
         c.execute(sql)
@@ -103,12 +97,12 @@ class Attendance:
         mydb.commit()
         self.options1 = values
         self.clicked1 = StringVar(self.frame)
-        # self.clicked.set(self.options[0])  # default option
+
         self.drop = OptionMenu(self.frame, self.clicked1, *self.options1)
         self.drop.grid(row=0, column=1)
 
         # drop down for usn
-        mydb = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+        mydb = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
         c = mydb.cursor()
         sql = "Select USN from Student"
         c.execute(sql)
@@ -118,20 +112,11 @@ class Attendance:
         self.options2 = records
         self.clicked2 = StringVar(self.frame)
 
-        # self.clicked.set(self.options[0])  # default option
         self.drop = OptionMenu(self.frame, self.clicked2, *self.options2)
         self.drop.grid(row=1, column=1)
 
-        self.drop = OptionMenu(self.frame, self.clicked3, *self.options)
-        self.drop.grid(row=2, column=1, pady=7)
-
-        # go back
-        self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.back)
-        self.cancel_btn.grid(row=6, column=1, pady=7, padx=7)
-
-
         # drop down for Fac_id
-        mydb = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+        mydb = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
         c = mydb.cursor()
         sql = "Select F_id from Faculty"
         c.execute(sql)
@@ -139,14 +124,14 @@ class Attendance:
         mydb.commit()
         self.options = list(item[0] for item in result)
         self.clicked3 = StringVar()
-        # self.clicked.set(self.options[0])  # default option
 
         self.drop = OptionMenu(self.frame, self.clicked3, *self.options)
         self.drop.grid(row=2, column=1, columnspan=2)
 
         # go back
-        self.cancel_btn = tk.Button(self.frame, text='go back', command=self.back)
-        self.cancel_btn.grid(row=6, column=2, columnspan=1)
+        self.cancel_btn = tk.Button(self.frame, text='Go Back', width="20", height="2", bg="light blue",
+                                    font=("Comic sans", 13, "bold"), command=self.back)
+        self.cancel_btn.grid(row=6, column=1, pady=7, padx=7)
 
     def back(self):
         self.frame.destroy()
@@ -165,7 +150,7 @@ class Attendance:
         if self.c_id == '' or self.usn == '' or self.f_id == '' or self.at_id == '' or self.at_pcnt == '':
             messagebox.showinfo('Error', 'All fields required')
         else:
-            mydb = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+            mydb = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
             c = mydb.cursor()
             sql = "Insert into Attendance (C_id,USN,F_id,At_id,At_percent) values (%s,%s,%s,%s,%s)"
             c.execute(sql, records)
@@ -188,7 +173,7 @@ class ViewAtt:
         self.USN_label.grid(row=0, column=0)
 
         # drop down for usn
-        mydb = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+        mydb = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
         c = mydb.cursor()
         sql = "Select Distinct USN from Attendance"
         c.execute(sql)
@@ -198,8 +183,9 @@ class ViewAtt:
         self.clicked1 = StringVar()
 
         self.drop = OptionMenu(self.frame, self.clicked1, *self.options1)
-        self.drop.grid(row=0, column=1)
+        self.drop.grid(row=0, column=1, pady=15)
 
+        # tree view styling
         self.style = ttk.Style()
         self.style.configure("Treeview", background="silver", foreground="black", fieldbackground="silver")
         self.style.map("Treeview", background=[('selected', "#00ff00")])
@@ -207,21 +193,23 @@ class ViewAtt:
         self.cols = ('Course_id', 'USN', 'Faculty_id', 'Attendance_id', 'Attendance_Percent')
         self.listBox = ttk.Treeview(self.frame, columns=self.cols, show='headings')
 
-
+        # treeview
         for col in self.cols:
             self.listBox.heading(col, text=col)
             self.listBox.grid(row=1, column=0, columnspan=2)
-            self.listBox.grid(row=4, column=0)
+            self.listBox.grid(row=1, column=0)
             self.listBox.column("#1", anchor=CENTER, width=100)
             self.listBox.column("#2", anchor=CENTER, width=100)
             self.listBox.column("#3", anchor=CENTER, width=120)
             self.listBox.column("#4", anchor=CENTER, width=100)
             self.listBox.column("#5", anchor=CENTER, width=100)
 
-        self.create_btn = Button(self.frame, text='Check Attendance',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.create)
-        self.create_btn.grid(row=1, column=1, padx=10, pady=10)
+        self.create_btn = Button(self.frame, text='Check Attendance', width="20", height="2", bg="light blue",
+                                 font=("Comic sans", 13, "bold"), command=self.create)
+        self.create_btn.grid(row=2, column=0, padx=10, pady=10)
 
-        self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.back)
+        self.cancel_btn = tk.Button(self.frame, text='Go Back', width="20", height="2", bg="light blue",
+                                    font=("Comic sans", 13, "bold"), command=self.back)
         self.cancel_btn.grid(row=2, column=1, columnspan=1)
 
     def back(self):
@@ -235,7 +223,7 @@ class ViewAtt:
         if (self.clicked1 == ''):
             messagebox.showinfo('Error', 'USN required!!')
         else:
-            mydb = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+            mydb = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
             c = mydb.cursor()
             sql = f"Select * from Attendance where USN = '{self.usn}' "
             c.execute(sql)
@@ -252,7 +240,6 @@ class login:
         self.root = root
         self.root.config(background='#1572A1')
         self.root.title('Admin Login')
-        # self.root.iconbitmap('C:\\Users\\Shreyas\\PycharmProjects\\DBMS_python\\Images\\Admin2.ico')
         self.root.geometry('700x600')
         self.frame = tk.Frame(self.root)
         self.frame.place(relx=0.5, rely=0.5, anchor="center")
@@ -264,41 +251,25 @@ class login:
 
         # Labels
         self.username_label = tk.Label(self.frame, text="Username:", font=('Helvetica', 15), bg='white')
-
         self.username_label.grid(row=4, column=9, pady=10)
+
         self.username = tk.Entry(self.frame, bg='white')
         self.username.grid(row=4, column=10, pady=10)
 
         self.password_label = tk.Label(self.frame, text="Password:", font=('Helvetica', 15), bg='white')
         self.password_label.grid(row=8, column=9, pady=10)
+
         self.password = tk.Entry(self.frame, bg='white')
-
-        self.username_label.grid(row=4, column=9, pady= 10)
-        self.username = tk.Entry(self.frame,bg='white', width=30)
-        self.username.grid(row=4, column=10, pady= 10)
-
-        self.password_label = tk.Label(self.frame, text="Password:", font=('Helvetica', 15), bg='white')
-        self.password_label.grid(row=8, column=9, pady= 10)
-        self.password = tk.Entry(self.frame, bg='white', width=30)
-
         self.password.grid(row=8, column=10, pady=10)
         self.password.config(show="*")
 
         # Login button
-
         self.login_btn = tk.Button(self.frame, width="20", height="2", bg="light blue", font=("Comic sans", 12, "bold"),
                                    text="Login", command=self.Login)
         self.login_btn.grid(row=10, column=10, pady=10)
 
-        self.login_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), text="Login", command=self.Login)
-        self.login_btn.grid(row=10, column=10, pady= 10)
-
-
         self.back_btn = tk.Button(self.frame, width="20", height="2", bg="light blue", font=("Comic sans", 12, "bold"),
                                   text='Go Back', command=self.back)
-
-        self.back_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), text='Go Back', command=self.back)
-
         self.back_btn.grid(row=15, column=10, pady=10)
 
     def back(self):
@@ -313,7 +284,7 @@ class login:
 
         if (self.uname == "" and self.pwd == ""):
             messagebox.showinfo("LoginError", "Blank Entries not allowed")
-        elif (self.uname == "123" and self.pwd == "123"):
+        elif (self.uname == "Admin" and self.pwd == "Admin123"):
             messagebox.showinfo('Welcome', 'Login Successful')
             self.frame.destroy()
             self.another = Records(self.root)
@@ -321,17 +292,16 @@ class login:
         else:
             messagebox.showinfo('LoginError', 'Incorrect Username and Password')
 
+
 class Records:
     def __init__(self, root):
         self.root = root
         self.root.title('Insert Profile')
-        # self.root.iconbitmap('C:\\Users\\Shreyas\\PycharmProjects\\DBMS_python\\Images\\Admin2.ico')
         self.root.geometry('700x600')
         self.frame = tk.Frame(self.root, bg="#1572A1")
         self.frame.place(relx=0.5, rely=0.5, anchor="center")
 
         # create btns
-
         self.Student_btn = Button(self.frame, width="20", height="2", bg="light blue", font=("Comic sans", 12, "bold"),
                                   text='Insert Student Profile', command=self.Student)
         self.Student_btn.grid(row=1, column=1, pady=10)
@@ -351,21 +321,6 @@ class Records:
         self.back_btn = tk.Button(self.frame, width="20", height="2", bg="light blue", font=("Comic sans", 12, "bold"),
                                   text='Go Back', command=self.back)
         self.back_btn.grid(row=5, column=1, pady=10)
-
-        self.Student_btn = Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), text='Insert Student Profile', command=self.Student)
-        self.Student_btn.grid(row=1, column=1,pady=10)
-
-        self.Faculty_btn = Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), text='Insert Faculty Profile', command=self.Faculty)
-        self.Faculty_btn.grid(row=2, column=1,pady=10 )
-
-        self.AddBranch_btn = Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), text='Add Branch', command=self.Branch)
-        self.AddBranch_btn.grid(row=3, column=1, pady=10)
-
-        self.AddCourse_btn = Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), text='Add Course', command=self.Course)
-        self.AddCourse_btn.grid(row=4, column=1,pady=10 )
-
-        self.back_btn = tk.Button(self.frame,width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), text='Go Back', command=self.back)
-        self.back_btn.grid(row=5,column=1,pady=10 )
 
     def back(self):
         self.frame.destroy()
@@ -423,7 +378,6 @@ class StuRec:
         self.S_Address.grid(row=4, column=1, pady=10)
 
         # Submit button
-
         self.submit_btn = Button(self.frame, text='Submit Profile', width="20", height="2", bg="light blue",
                                  font=("Comic sans", 12, "bold"), command=self.submit)
         self.submit_btn.grid(row=6, column=0, padx=10, pady=10)
@@ -443,11 +397,6 @@ class StuRec:
                                     font=("Comic sans", 12, "bold"), command=self.back)
         self.cancel_btn.grid(row=9, column=2, padx=10, pady=20)
 
-        # go back
-        self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.back)
-        self.cancel_btn.grid(row=9, column=2,padx=10, pady=20)
-
-
     def back(self):
         self.frame.destroy()
         self.root = root
@@ -466,7 +415,7 @@ class StuRec:
         if (self.usn == '' or self.name == '' or self.phone == '' or self.email == '' or self.address == ''):
             messagebox.showinfo('Insert Status', 'All fields are required')
         else:
-            conn = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+            conn = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
             c = conn.cursor()
             sql = "Insert into student(USN, S_Name, S_Phone, S_Email, S_Address) values (%s,%s,%s,%s,%s)"
             c.execute(sql, self.records)
@@ -490,7 +439,7 @@ class StuRec:
         if (self.usn == " "):
             messagebox.showinfo("Delete Status", "USN not found")
         else:
-            conn = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+            conn = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
             c = conn.cursor()
             sql = f"DELETE FROM student WHERE USN='{self.usn}'"
             print(sql)
@@ -513,6 +462,7 @@ class StuRec:
     def GetProfile(self):
         self.frame.destroy()
         self.another = StuShowProfile(self.root)
+
 
 class StuShowProfile:
     def __init__(self, root):
@@ -633,7 +583,7 @@ class FacultyRec:
                 self.Fac_id == '' or self.Fac_Name == '' or self.Fac_phone == '' or self.Fac_email == '' or self.Fac_address == ''):
             messagebox.showinfo('Insert Status', 'All fields are required')
         else:
-            conn = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+            conn = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
             c = conn.cursor()
             sql = "Insert into Faculty(F_id, F_Name, F_Phone, F_Email, F_Address) values (%s,%s,%s,%s,%s)"
             c.execute(sql, self.records)
@@ -657,7 +607,7 @@ class FacultyRec:
         if (self.Fac_id == " "):
             messagebox.showinfo("Delete Status", "USN not found")
         else:
-            conn = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+            conn = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
             c = conn.cursor()
             sql = f"DELETE FROM faculty WHERE F_id ='{self.Fac_id}'"
             print(sql)
@@ -694,7 +644,7 @@ class FacShowProfile:
         self.style.configure("Treeview", background="silver", foreground="black", fieldbackground="silver")
         self.style.map("Treeview", background=[('selected', "#00ff00")])
 
-        self.cols = ('USN', 'Name', 'Phone Number', 'Email', 'Address')
+        self.cols = ('F_id', 'F_Name', 'F_Phone', 'F_Email', 'F_Address')
         self.listBox = ttk.Treeview(self.frame, columns=self.cols, show='headings')
 
         for col in self.cols:
@@ -724,7 +674,7 @@ class FacShowProfile:
     def back(self):
         self.frame.destroy()
         self.root = root
-        self.another = StuRec(self.root)
+        self.another = FacultyRec(self.root)
 
 
 class AddBranch:
@@ -748,9 +698,6 @@ class AddBranch:
 
         self.create_btn = Button(self.frame, text='Register', width="20", height="2", bg="light blue",
                                  font=("Comic sans", 12, "bold"), command=self.create)
-
-        self.create_btn = Button(self.frame, text='Register',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"),command=self.create)
-
         self.create_btn.grid(row=4, column=1, padx=10, pady=10)
 
         # dropdown for Branch Name
@@ -765,7 +712,7 @@ class AddBranch:
         self.drop.grid(row=1, column=1, pady=10)
 
         # drop down for USN
-        mydb = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+        mydb = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
         c = mydb.cursor()
         sql = "Select USN from Student"
         c.execute(sql)
@@ -778,7 +725,7 @@ class AddBranch:
         self.drop.grid(row=2, column=1, pady=10)
 
         # drop down for Fac_id
-        mydb = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+        mydb = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
         c = mydb.cursor()
         sql = "Select F_id from Faculty"
         c.execute(sql)
@@ -791,12 +738,8 @@ class AddBranch:
         self.drop.grid(row=3, column=1, pady=10)
 
         # go back
-
         self.cancel_btn = tk.Button(self.frame, text='Go Back', width="20", height="2", bg="light blue",
                                     font=("Comic sans", 12, "bold"), command=self.back)
-
-        self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.back)
-
         self.cancel_btn.grid(row=5, column=1)
 
     def back(self):
@@ -815,7 +758,7 @@ class AddBranch:
         if self.Branch_Name == '' or self.USN == '' or self.Fac_id == '':
             messagebox.showinfo('Error', 'All fields required')
         else:
-            mydb = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+            mydb = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
             c = mydb.cursor()
             sql = "Insert into Branch values (%s,%s,%s)"
             c.execute(sql, records)
@@ -853,16 +796,12 @@ class AddCourse:
         self.C_Name = Entry(self.frame, width=30)
         self.C_Name.grid(row=1, column=1, pady=10)
 
-
         self.create_btn = Button(self.frame, text='Register', width="20", height="2", bg="light blue",
                                  font=("Comic sans", 12, "bold"), command=self.create)
-
-        self.create_btn = Button(self.frame, text='Register',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.create)
-
         self.create_btn.grid(row=4, column=1, padx=10, pady=10)
 
         # drop down for usn
-        mydb = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+        mydb = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
         c = mydb.cursor()
         sql = "Select USN from Student"
         c.execute(sql)
@@ -875,7 +814,7 @@ class AddCourse:
         self.drop.grid(row=2, column=1, pady=10)
 
         # drop down for Fac_id
-        mydb = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+        mydb = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
         c = mydb.cursor()
         sql = "Select F_id from Faculty"
         c.execute(sql)
@@ -888,14 +827,9 @@ class AddCourse:
         self.drop.grid(row=3, column=1, pady=10)
 
         # go back
-
         self.cancel_btn = tk.Button(self.frame, text='Go Back', width="20", height="2", bg="light blue",
                                     font=("Comic sans", 12, "bold"), command=self.back)
         self.cancel_btn.grid(row=5, column=1, padx=10, pady=10)
-
-        self.cancel_btn = tk.Button(self.frame, text='Go Back',width="20",height="2",bg="light blue", font=("Comic sans", 13, "bold"), command=self.back)
-        self.cancel_btn.grid(row=5, column=1, padx=10, pady=(10,10))
-
 
     def back(self):
         self.frame.destroy()
@@ -913,7 +847,7 @@ class AddCourse:
         if self.c_id == '' or self.c_name == '' or self.usn == '' or self.f_id == '':
             messagebox.showinfo('Error', 'All fields required')
         else:
-            mydb = ms.connect(host='localhost', user='root', passwd='Varna@178', database='sams')
+            mydb = ms.connect(host='localhost', user='root', passwd='Shrey@145', database='sams')
             c = mydb.cursor()
             sql = "Insert into Course (C_id,C_Name,USN,F_id) values (%s,%s,%s,%s)"
             c.execute(sql, records)
@@ -930,4 +864,3 @@ class AddCourse:
 root = tk.Tk()
 run = Home(root)
 root.mainloop()
-
